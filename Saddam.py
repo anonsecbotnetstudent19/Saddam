@@ -32,7 +32,7 @@ HELP = (
 
 OPTIONS = (
 	(('-d', '--dns'), dict(dest='dns', metavar='FILE:FILE|DOMAIN', help=HELP[0])),
-	(('-pw', '--pw'), dict(dest='pwh', metavar='FILE', help=HELP[1])),
+	(('-pw', '--pwh'), dict(dest='pwh', metavar='FILE', help=HELP[1])),
 	(('-s', '--snmp'), dict(dest='snmp', metavar='FILE', help=HELP[2])),
 	(('-p', '--ssdp'), dict(dest='ssdp', metavar='FILE', help=HELP[3])),
 	(('-t', '--threads'), dict(dest='threads', type=int, default=1, metavar='N', help=HELP[4])) )
