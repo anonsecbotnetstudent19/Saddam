@@ -279,10 +279,10 @@ class DDoS(object):
 			_files[proto][FILE_HANDLE].close()
 
 def main():
-	parser = OptionParser(usage=USAGE)
-	for args, kwargs in OPTIONS:
-		parser.add_option(args=args, **kwargs)
-	options, args = parser.parse_args()
+    parser = OptionParser(usage=USAGE)
+    for args, kwargs in OPTIONS:
+        parser.add_option(args=args, **kwargs)
+    options, args = parser.parse_args()
 	domains = None
 	if len(args)<1:
 		parser.print_help()
