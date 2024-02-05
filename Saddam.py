@@ -53,7 +53,7 @@ ATTACK = (
 
 PORT = {
 	'dns': 53,
-	'pwh': 123,
+	'pwh': 20811,
 	'snmp': 161,
 	'ssdp': 1900 }
 
